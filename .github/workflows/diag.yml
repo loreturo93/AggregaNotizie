@@ -1,0 +1,23 @@
+name: diag-temporaneo
+on:
+  push:
+    branches: [claude/news-aggregator-categories-wmzxue]
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: |
+          node -e '
+          const cfg=require("./feeds.json"); const {decodeXml,parseFeed}=require("./lib/parser");
+          const seen=new Set();
+          (async()=>{ for (const f of cfg.feeds) { if (seen.has(f.source)) continue; seen.add(f.source);
+            try { const r=await fetch(f.url,{headers:{"User-Agent":"AggregaNotizie/1.0"}}); const x=decodeXml(new Uint8Array(await r.arrayBuffer()));
+              const it=(x.match(/<item\b[\s\S]*?<\/item>/i)||[""])[0]; const p=parseFeed(x);
+              console.log("=====",f.source,"img trovate:",p.filter(i=>i.image).length+"/"+p.length);
+              console.log(it.slice(0,1800));
+              const art = p[0] && await fetch(p[0].link,{headers:{"User-Agent":"Mozilla/5.0"}}).then(r=>r.text()).catch(e=>"ERR "+e);
+              console.log("-- og:image:", (String(art).match(/<meta[^>]+property=["\x27]og:image["\x27][^>]*>/i)||["nessuna"])[0]);
+            } catch(e){ console.log("=====",f.source,"ERR",e.message) } } })()'
