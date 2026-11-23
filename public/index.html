@@ -39,6 +39,25 @@
     <p id="errors"></p>
   </footer>
 
+  <dialog id="reader" aria-labelledby="reader-title">
+    <article class="reader">
+      <div class="reader-bar">
+        <button type="button" class="icon-btn" data-nav="-1" aria-label="Notizia precedente" title="Precedente (←)">‹</button>
+        <button type="button" class="icon-btn" data-nav="1" aria-label="Notizia successiva" title="Successiva (→)">›</button>
+        <span class="reader-pos" id="reader-pos"></span>
+        <button type="button" class="icon-btn close" id="reader-close" aria-label="Chiudi" title="Chiudi (Esc)">✕</button>
+      </div>
+      <img id="reader-img" alt="" referrerpolicy="no-referrer">
+      <div class="reader-body">
+        <div class="meta" id="reader-meta"></div>
+        <h2 id="reader-title"></h2>
+        <p id="reader-desc"></p>
+        <a id="reader-link" class="read-full" target="_blank" rel="noopener noreferrer"></a>
+        <p class="reader-note">L'anteprima mostra il sommario pubblicato dalla testata nel suo feed. L'articolo completo si apre sul sito originale.</p>
+      </div>
+    </article>
+  </dialog>
+
   <script src="app.js"></script>
 </body>
 </html>

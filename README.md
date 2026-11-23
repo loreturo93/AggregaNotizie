@@ -8,6 +8,7 @@ Una pagina web che raccoglie le notizie delle principali testate italiane dai lo
 
 ## Funzionalità
 
+- Cliccando una notizia si apre un'anteprima dentro la pagina (immagine, titolo, sommario della testata) con le frecce per passare alla successiva; il sito originale si apre solo con "Leggi l'articolo completo" (o con Ctrl/Cmd+clic)
 - Home con una sezione per categoria e le notizie più recenti di ognuna
 - Pagina dedicata per ogni categoria (`/#sport`, `/#esteri`, …) con caricamento progressivo
 - Ricerca testuale su tutte le notizie
