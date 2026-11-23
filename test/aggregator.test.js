@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const http = require('node:http');
-const { parseFeed, decodeXml } = require('../lib/parser');
+const { parseFeed, parseDate, extractOgImage, decodeXml } = require('../lib/parser');
 const { aggregate, guessCategory } = require('../lib/aggregator');
 
 const RSS = `<?xml version="1.0" encoding="UTF-8"?>
@@ -88,7 +88,7 @@ test('aggregate unisce i feed, deduplica, ordina e segnala gli errori', async (t
       { source: 'B', category: 'auto', url: `${base}/atom` },
       { source: 'C', category: 'sport', url: `${base}/manca` },
     ],
-  });
+  }, { fetchImages: false, maxAgeDays: 0 });
 
   assert.equal(data.items.length, 3);
   assert.deepEqual(data.items.map((i) => i.link), [
@@ -100,4 +100,53 @@ test('aggregate unisce i feed, deduplica, ordina e segnala gli errori', async (t
   assert.deepEqual(data.sources, ['A', 'B', 'C']);
   assert.equal(data.errors.length, 1);
   assert.equal(data.errors[0].source, 'C');
+});
+
+test('parseDate capisce le date scritte in italiano', () => {
+  assert.equal(parseDate('lun, 23 nov 2026 12:53:55 GMT'), '2026-11-23T12:53:55.000Z');
+  assert.equal(parseDate('mar, 3 mar 2026 10:00:00 +0100'), '2026-03-03T09:00:00.000Z');
+  assert.equal(parseDate('Mon, 23 Nov 2026 13:17:48 +0100'), '2026-11-23T12:17:48.000Z');
+  assert.equal(parseDate('non è una data'), null);
+});
+
+test('extractOgImage legge og:image in qualsiasi ordine di attributi e risolve URL relativi', () => {
+  assert.equal(extractOgImage('<head><meta content="https://x.it/a.jpg" property="og:image"></head>', 'https://x.it/'), 'https://x.it/a.jpg');
+  assert.equal(extractOgImage("<meta name='twitter:image' content='/img/b.jpg'>", 'https://y.it/art/1'), 'https://y.it/img/b.jpg');
+  assert.equal(extractOgImage('<head></head><meta property="og:image" content="https://z.it/body.jpg">', 'https://z.it/'), '');
+});
+
+test('aggregate prende le immagini mancanti dalla pagina, usa la cache e scarta le notizie vecchie', async (t) => {
+  const now = Date.now();
+  const rfc = (ms) => new Date(ms).toUTCString();
+  let pageHits = 0;
+  const server = http.createServer((req, res) => {
+    const base = `http://127.0.0.1:${server.address().port}`;
+    if (req.url === '/feed') {
+      return res.end(`<rss><channel>
+        <item><title>Nuova</title><link>${base}/art/1</link><pubDate>${rfc(now)}</pubDate></item>
+        <item><title>In cache</title><link>${base}/art/2</link><pubDate>${rfc(now - 3600e3)}</pubDate></item>
+        <item><title>Vecchia</title><link>${base}/art/3</link><pubDate>${rfc(now - 30 * 86400e3)}</pubDate></item>
+      </channel></rss>`);
+    }
+    if (req.url.startsWith('/art/')) {
+      pageHits++;
+      return res.end(`<html><head><meta property="og:image" content="/img${req.url.slice(4)}.jpg"></head><body>…</body></html>`);
+    }
+    res.writeHead(404).end();
+  });
+  await new Promise((r) => server.listen(0, r));
+  t.after(() => server.close());
+  const base = `http://127.0.0.1:${server.address().port}`;
+
+  const imageCache = new Map([[`${base}/art/2`, 'https://cache.it/2.jpg']]);
+  const data = await aggregate(
+    { categories: [{ id: 'cronaca', label: 'Cronaca' }], feeds: [{ source: 'X', category: 'cronaca', url: `${base}/feed` }] },
+    { imageCache },
+  );
+
+  assert.deepEqual(data.items.map((i) => i.title), ['Nuova', 'In cache']);
+  assert.equal(data.items[0].image, `${base}/img/1.jpg`);
+  assert.equal(data.items[1].image, 'https://cache.it/2.jpg');
+  assert.equal(pageHits, 1);
+  assert.equal(imageCache.get(`${base}/art/1`), `${base}/img/1.jpg`);
 });

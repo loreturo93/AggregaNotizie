@@ -27,8 +27,11 @@ jobs:
         with:
           node-version: 22
       - run: npm test
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: npm run build
-      - uses: actions/configure-pages@v5
+        env:
+          PREVIOUS_NEWS_URL: ${{ steps.pages.outputs.base_url }}/news.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

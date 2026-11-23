@@ -9,15 +9,18 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - run: |
+      - name: Build completo con immagini
+        run: time node build.js
+      - name: Candidati Corriere e Gazzetta
+        run: |
           node -e '
-          const cfg=require("./feeds.json"); const {decodeXml,parseFeed}=require("./lib/parser");
-          const seen=new Set();
-          (async()=>{ for (const f of cfg.feeds) { if (seen.has(f.source)) continue; seen.add(f.source);
-            try { const r=await fetch(f.url,{headers:{"User-Agent":"AggregaNotizie/1.0"}}); const x=decodeXml(new Uint8Array(await r.arrayBuffer()));
-              const it=(x.match(/<item\b[\s\S]*?<\/item>/i)||[""])[0]; const p=parseFeed(x);
-              console.log("=====",f.source,"img trovate:",p.filter(i=>i.image).length+"/"+p.length);
-              console.log(it.slice(0,1800));
-              const art = p[0] && await fetch(p[0].link,{headers:{"User-Agent":"Mozilla/5.0"}}).then(r=>r.text()).catch(e=>"ERR "+e);
-              console.log("-- og:image:", (String(art).match(/<meta[^>]+property=["\x27]og:image["\x27][^>]*>/i)||["nessuna"])[0]);
-            } catch(e){ console.log("=====",f.source,"ERR",e.message) } } })()'
+          const {decodeXml,parseFeed}=require("./lib/parser");
+          const urls=[
+            "https://www.corriere.it/rss/homepage.xml","https://www.corriere.it/rss/politica.xml","https://www.corriere.it/rss/esteri.xml",
+            "https://www.corriere.it/dynamic-feed/rss/section/Politica.xml","https://www.corriere.it/dynamic-feed/rss/homepage.xml",
+            "https://xml2.corriereobjects.it/rss/homepage.xml","https://xml2.corriereobjects.it/rss/ultimora.xml",
+            "https://www.gazzetta.it/rss/calcio.xml","https://www.gazzetta.it/rss/ultima-ora.xml","https://www.gazzetta.it/rss/Calcio.xml",
+            "https://www.gazzetta.it/dynamic-feed/rss/section/last.xml","https://www.gazzetta.it/dynamic-feed/rss/section/Calcio.xml",
+            "https://www.gazzetta.it/dynamic-feed/rss/homepage.xml"];
+          (async()=>{for(const u of urls){try{const r=await fetch(u,{headers:{"User-Agent":"Mozilla/5.0"}});const x=decodeXml(new Uint8Array(await r.arrayBuffer()));const p=parseFeed(x);const d=p.map(i=>i.date).filter(Boolean).sort().pop();
+            console.log(r.status,u,"items:",p.length,"img:",p.filter(i=>i.image).length,"piu_recente:",d,"|",p[0]&&p[0].title.slice(0,70))}catch(e){console.log("ERR",u,e.message)}}})()'

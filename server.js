@@ -12,6 +12,7 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'feeds.json'), 'utf8'));
 
 let cache = null;
+const imageCache = new Map(); // link → immagine, per non riscaricare le pagine degli articoli
 let cacheTime = 0;
 let pending = null;
 
@@ -19,7 +20,8 @@ async function getNews(force = false) {
   const fresh = cache && Date.now() - cacheTime < CACHE_MINUTES * 60_000;
   if (fresh && !force) return cache;
   if (!pending) {
-    pending = aggregate(config)
+    if (imageCache.size > 5000) imageCache.clear();
+    pending = aggregate(config, { imageCache })
       .then((data) => {
         cache = data;
         cacheTime = Date.now();
