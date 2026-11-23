@@ -1,0 +1,59 @@
+{
+  "categories": [
+    { "id": "politica",   "label": "Politica" },
+    { "id": "cronaca",    "label": "Cronaca" },
+    { "id": "economia",   "label": "Economia" },
+    { "id": "esteri",     "label": "Esteri" },
+    { "id": "sport",      "label": "Sport" },
+    { "id": "cultura",    "label": "Cultura e Spettacoli" },
+    { "id": "tecnologia", "label": "Tecnologia e Scienza" }
+  ],
+  "feeds": [
+    { "source": "ANSA", "category": "politica",   "url": "https://www.ansa.it/sito/notizie/politica/politica_rss.xml" },
+    { "source": "ANSA", "category": "cronaca",    "url": "https://www.ansa.it/sito/notizie/cronaca/cronaca_rss.xml" },
+    { "source": "ANSA", "category": "economia",   "url": "https://www.ansa.it/sito/notizie/economia/economia_rss.xml" },
+    { "source": "ANSA", "category": "esteri",     "url": "https://www.ansa.it/sito/notizie/mondo/mondo_rss.xml" },
+    { "source": "ANSA", "category": "sport",      "url": "https://www.ansa.it/sito/notizie/sport/sport_rss.xml" },
+    { "source": "ANSA", "category": "cultura",    "url": "https://www.ansa.it/sito/notizie/cultura/cultura_rss.xml" },
+    { "source": "ANSA", "category": "tecnologia", "url": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml" },
+
+    { "source": "la Repubblica", "category": "politica",   "url": "https://www.repubblica.it/rss/politica/rss2.0.xml" },
+    { "source": "la Repubblica", "category": "cronaca",    "url": "https://www.repubblica.it/rss/cronaca/rss2.0.xml" },
+    { "source": "la Repubblica", "category": "economia",   "url": "https://www.repubblica.it/rss/economia/rss2.0.xml" },
+    { "source": "la Repubblica", "category": "esteri",     "url": "https://www.repubblica.it/rss/esteri/rss2.0.xml" },
+    { "source": "la Repubblica", "category": "sport",      "url": "https://www.repubblica.it/rss/sport/rss2.0.xml" },
+    { "source": "la Repubblica", "category": "cultura",    "url": "https://www.repubblica.it/rss/spettacoli/rss2.0.xml" },
+    { "source": "la Repubblica", "category": "tecnologia", "url": "https://www.repubblica.it/rss/tecnologia/rss2.0.xml" },
+
+    { "source": "Corriere della Sera", "category": "politica",   "url": "https://xml2.corriereobjects.it/rss/politica.xml" },
+    { "source": "Corriere della Sera", "category": "cronaca",    "url": "https://xml2.corriereobjects.it/rss/cronache.xml" },
+    { "source": "Corriere della Sera", "category": "economia",   "url": "https://xml2.corriereobjects.it/rss/economia.xml" },
+    { "source": "Corriere della Sera", "category": "esteri",     "url": "https://xml2.corriereobjects.it/rss/esteri.xml" },
+    { "source": "Corriere della Sera", "category": "sport",      "url": "https://xml2.corriereobjects.it/rss/sport.xml" },
+    { "source": "Corriere della Sera", "category": "cultura",    "url": "https://xml2.corriereobjects.it/rss/cultura.xml" },
+    { "source": "Corriere della Sera", "category": "tecnologia", "url": "https://xml2.corriereobjects.it/rss/tecnologia.xml" },
+
+    { "source": "Il Sole 24 Ore", "category": "economia",   "url": "https://www.ilsole24ore.com/rss/economia.xml" },
+    { "source": "Il Sole 24 Ore", "category": "esteri",     "url": "https://www.ilsole24ore.com/rss/mondo.xml" },
+    { "source": "Il Sole 24 Ore", "category": "tecnologia", "url": "https://www.ilsole24ore.com/rss/tecnologia.xml" },
+    { "source": "Il Sole 24 Ore", "category": "cultura",    "url": "https://www.ilsole24ore.com/rss/cultura.xml" },
+
+    { "source": "Sky TG24", "category": "politica",   "url": "https://tg24.sky.it/rss/tg24_politica.xml" },
+    { "source": "Sky TG24", "category": "cronaca",    "url": "https://tg24.sky.it/rss/tg24_cronaca.xml" },
+    { "source": "Sky TG24", "category": "economia",   "url": "https://tg24.sky.it/rss/tg24_economia.xml" },
+    { "source": "Sky TG24", "category": "esteri",     "url": "https://tg24.sky.it/rss/tg24_mondo.xml" },
+    { "source": "Sky TG24", "category": "sport",      "url": "https://tg24.sky.it/rss/tg24_sport.xml" },
+    { "source": "Sky TG24", "category": "cultura",    "url": "https://tg24.sky.it/rss/tg24_spettacolo.xml" },
+    { "source": "Sky TG24", "category": "tecnologia", "url": "https://tg24.sky.it/rss/tg24_tecnologia.xml" },
+
+    { "source": "Il Post", "category": "politica",   "url": "https://www.ilpost.it/politica/feed/" },
+    { "source": "Il Post", "category": "cronaca",    "url": "https://www.ilpost.it/italia/feed/" },
+    { "source": "Il Post", "category": "economia",   "url": "https://www.ilpost.it/economia/feed/" },
+    { "source": "Il Post", "category": "esteri",     "url": "https://www.ilpost.it/mondo/feed/" },
+    { "source": "Il Post", "category": "sport",      "url": "https://www.ilpost.it/sport/feed/" },
+    { "source": "Il Post", "category": "cultura",    "url": "https://www.ilpost.it/cultura/feed/" },
+    { "source": "Il Post", "category": "tecnologia", "url": "https://www.ilpost.it/tecnologia/feed/" },
+
+    { "source": "La Gazzetta dello Sport", "category": "sport", "url": "https://www.gazzetta.it/rss/home.xml" }
+  ]
+}

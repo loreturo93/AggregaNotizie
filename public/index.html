@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AggregaNotizie</title>
+  <meta name="description" content="Le notizie delle principali testate italiane, divise per categoria.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-row">
+      <a class="brand" href="#">Aggrega<span>Notizie</span></a>
+      <div class="search">
+        <input id="search" type="search" placeholder="Cerca nelle notizie…" aria-label="Cerca nelle notizie">
+      </div>
+      <div class="status">
+        <span id="updated" aria-live="polite"></span>
+        <button id="refresh" type="button" title="Aggiorna">↻ Aggiorna</button>
+      </div>
+    </div>
+    <nav class="wrap tabs" id="tabs" aria-label="Categorie"></nav>
+  </header>
+
+  <main class="wrap">
+    <details class="sources" id="sources-box">
+      <summary>Testate <span id="sources-count"></span></summary>
+      <div class="chips" id="sources"></div>
+    </details>
+
+    <div id="content" aria-live="polite">
+      <p class="empty">Caricamento delle notizie…</p>
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Titoli e link provengono dai feed RSS pubblici delle testate. Ogni notizia rimanda all'articolo originale.</p>
+    <p id="errors"></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

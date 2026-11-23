@@ -1,0 +1,222 @@
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --text: #1c1c1e;
+  --muted: #6b6b70;
+  --border: #e3e1da;
+  --accent: #b3261e;
+  --accent-soft: #fbe9e7;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 4px 14px rgb(0 0 0 / 0.04);
+
+  --c-politica: #3949ab;
+  --c-cronaca: #6d4c41;
+  --c-economia: #2e7d32;
+  --c-esteri: #00838f;
+  --c-sport: #ef6c00;
+  --c-cultura: #8e24aa;
+  --c-tecnologia: #1565c0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121214;
+    --surface: #1c1c1f;
+    --text: #ececef;
+    --muted: #9a9aa2;
+    --border: #2c2c31;
+    --accent: #ff6b5e;
+    --accent-soft: #3a1f1d;
+    --shadow: none;
+
+    --c-politica: #8c9eff;
+    --c-cronaca: #bcaaa4;
+    --c-economia: #81c784;
+    --c-esteri: #4dd0e1;
+    --c-sport: #ffb74d;
+    --c-cultura: #ce93d8;
+    --c-tecnologia: #64b5f6;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+a { color: inherit; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- Barra superiore ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.brand span { color: var(--accent); }
+
+.search { flex: 1 1 260px; }
+.search input {
+  width: 100%;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+.search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.status { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 0.85rem; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+button:hover { border-color: var(--accent); color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: progress; }
+
+/* ---------- Tab categorie ---------- */
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  flex: none;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-current="page"] { color: var(--text); border-bottom-color: var(--cat, var(--accent)); }
+.tab .count { font-size: 0.75rem; color: var(--muted); margin-left: 4px; }
+
+/* ---------- Filtro testate ---------- */
+.sources { margin: 18px 0 6px; }
+.sources summary { cursor: pointer; color: var(--muted); font-size: 0.9rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; }
+.chip {
+  font-size: 0.85rem;
+  padding: 4px 12px;
+}
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Sezioni e card ---------- */
+.section { margin: 28px 0 36px; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 3px solid var(--cat);
+  padding-top: 8px;
+  margin-bottom: 14px;
+}
+.section-head h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  color: var(--cat);
+}
+.section-head a { font-size: 0.9rem; color: var(--muted); text-decoration: none; }
+.section-head a:hover { color: var(--cat); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--cat); }
+
+.card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--border);
+}
+
+.card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+
+.meta { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; color: var(--muted); flex-wrap: wrap; }
+.meta .source { font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.03em; }
+.meta .cat { color: var(--cat); font-weight: 600; }
+
+.card h3 { margin: 0; font-size: 1.02rem; line-height: 1.35; }
+.card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.more { display: flex; justify-content: center; margin: 24px 0; }
+
+.empty { text-align: center; color: var(--muted); padding: 60px 0; }
+
+.footer { color: var(--muted); font-size: 0.8rem; padding-top: 20px; padding-bottom: 40px; border-top: 1px solid var(--border); margin-top: 40px; }
+
+/* Colore per categoria */
+[data-cat="politica"]   { --cat: var(--c-politica); }
+[data-cat="cronaca"]    { --cat: var(--c-cronaca); }
+[data-cat="economia"]   { --cat: var(--c-economia); }
+[data-cat="esteri"]     { --cat: var(--c-esteri); }
+[data-cat="sport"]      { --cat: var(--c-sport); }
+[data-cat="cultura"]    { --cat: var(--c-cultura); }
+[data-cat="tecnologia"] { --cat: var(--c-tecnologia); }
+
+@media (max-width: 600px) {
+  .status #updated { display: none; }
+  .brand { font-size: 1.35rem; }
+  .status { margin-left: auto; }
+  .search { order: 3; flex-basis: 100%; }
+}
