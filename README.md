@@ -12,7 +12,8 @@ Una pagina web che raccoglie le notizie delle principali testate italiane dai lo
 - Pagina dedicata per ogni categoria (`/#sport`, `/#esteri`, …) con caricamento progressivo
 - Ricerca testuale su tutte le notizie
 - Filtro per testata (la scelta resta salvata nel browser)
-- Notizie doppie eliminate, ordinamento per data, orario relativo ("15 minuti fa")
+- Immagine per ogni notizia: se il feed non la contiene viene presa dall'anteprima dell'articolo (`og:image`)
+- Notizie doppie eliminate, notizie più vecchie di 7 giorni scartate, ordinamento per data, orario relativo ("15 minuti fa")
 - Aggiornamento automatico ogni 10 minuti, tema chiaro e scuro, layout adatto ai telefoni
 
 ## Avvio
@@ -39,7 +40,7 @@ Il browser non può leggere direttamente i feed RSS di altri siti (blocco CORS).
 ```
 feeds.json          elenco di testate, feed e categorie
 lib/parser.js       lettura dei feed RSS 2.0 e Atom
-lib/aggregator.js   download in parallelo, deduplica, ordinamento, categorie
+lib/aggregator.js   download in parallelo, deduplica, ordinamento, categorie, immagini
 server.js           server HTTP: pagina + API /api/news con cache
 build.js            genera public/news.json per la versione statica
 public/             la pagina web (HTML, CSS, JS)

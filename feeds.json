@@ -24,13 +24,15 @@
     { "source": "la Repubblica", "category": "cultura",    "url": "https://www.repubblica.it/rss/spettacoli/rss2.0.xml" },
     { "source": "la Repubblica", "category": "tecnologia", "url": "https://www.repubblica.it/rss/tecnologia/rss2.0.xml" },
 
-    { "source": "Corriere della Sera", "category": "politica",   "url": "https://xml2.corriereobjects.it/rss/politica.xml" },
-    { "source": "Corriere della Sera", "category": "cronaca",    "url": "https://xml2.corriereobjects.it/rss/cronache.xml" },
-    { "source": "Corriere della Sera", "category": "economia",   "url": "https://xml2.corriereobjects.it/rss/economia.xml" },
-    { "source": "Corriere della Sera", "category": "esteri",     "url": "https://xml2.corriereobjects.it/rss/esteri.xml" },
-    { "source": "Corriere della Sera", "category": "sport",      "url": "https://xml2.corriereobjects.it/rss/sport.xml" },
-    { "source": "Corriere della Sera", "category": "cultura",    "url": "https://xml2.corriereobjects.it/rss/cultura.xml" },
-    { "source": "Corriere della Sera", "category": "tecnologia", "url": "https://xml2.corriereobjects.it/rss/tecnologia.xml" },
+    { "source": "Corriere della Sera", "category": "politica",   "url": "https://www.corriere.it/dynamic-feed/rss/section/Politica.xml" },
+    { "source": "Corriere della Sera", "category": "cronaca",    "url": "https://www.corriere.it/dynamic-feed/rss/section/Cronaca.xml" },
+    { "source": "Corriere della Sera", "category": "economia",   "url": "https://www.corriere.it/dynamic-feed/rss/section/Economia.xml" },
+    { "source": "Corriere della Sera", "category": "esteri",     "url": "https://www.corriere.it/dynamic-feed/rss/section/Esteri.xml" },
+    { "source": "Corriere della Sera", "category": "sport",      "url": "https://www.corriere.it/dynamic-feed/rss/section/Sport.xml" },
+    { "source": "Corriere della Sera", "category": "cultura",    "url": "https://www.corriere.it/dynamic-feed/rss/section/Cultura.xml" },
+    { "source": "Corriere della Sera", "category": "tecnologia", "url": "https://www.corriere.it/dynamic-feed/rss/section/Tecnologia.xml" },
+    { "source": "Corriere della Sera", "category": "cultura",    "url": "https://www.corriere.it/dynamic-feed/rss/section/Spettacoli.xml" },
+    { "source": "Corriere della Sera", "category": "tecnologia", "url": "https://www.corriere.it/dynamic-feed/rss/section/Scienze.xml" },
 
     { "source": "Il Sole 24 Ore", "category": "economia",   "url": "https://www.ilsole24ore.com/rss/economia.xml" },
     { "source": "Il Sole 24 Ore", "category": "esteri",     "url": "https://www.ilsole24ore.com/rss/mondo.xml" },
@@ -53,6 +55,6 @@
     { "source": "Il Post", "category": "cultura",    "url": "https://www.ilpost.it/cultura/feed/" },
     { "source": "Il Post", "category": "tecnologia", "url": "https://www.ilpost.it/tecnologia/feed/" },
 
-    { "source": "La Gazzetta dello Sport", "category": "sport", "url": "https://www.gazzetta.it/rss/home.xml" }
+    { "source": "La Gazzetta dello Sport", "category": "sport", "url": "https://www.gazzetta.it/dynamic-feed/rss/section/last.xml" }
   ]
 }
