@@ -21,7 +21,6 @@
     { "source": "la Repubblica", "category": "cronaca",    "url": "https://www.repubblica.it/rss/cronaca/rss2.0.xml" },
     { "source": "la Repubblica", "category": "economia",   "url": "https://www.repubblica.it/rss/economia/rss2.0.xml" },
     { "source": "la Repubblica", "category": "esteri",     "url": "https://www.repubblica.it/rss/esteri/rss2.0.xml" },
-    { "source": "la Repubblica", "category": "sport",      "url": "https://www.repubblica.it/rss/sport/rss2.0.xml" },
     { "source": "la Repubblica", "category": "cultura",    "url": "https://www.repubblica.it/rss/spettacoli/rss2.0.xml" },
     { "source": "la Repubblica", "category": "tecnologia", "url": "https://www.repubblica.it/rss/tecnologia/rss2.0.xml" },
 
