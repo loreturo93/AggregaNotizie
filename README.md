@@ -57,13 +57,19 @@ Se un feed mescola più argomenti, usa `"category": "auto"`: la categoria verrà
 
 Anche le categorie si cambiano in `feeds.json`. Per dare un colore a una categoria nuova, aggiungi una riga `[data-cat="..."]` in `public/style.css`.
 
-## Versione statica (senza server)
+## Pubblicazione online (GitHub Pages)
 
-```bash
-npm run build
-```
+Il workflow `.github/workflows/pages.yml` scarica le notizie e pubblica la cartella `public/` su GitHub Pages:
 
-Il comando genera `public/news.json`. La cartella `public/` si può pubblicare su un hosting statico (GitHub Pages, Netlify, …): se `/api/news` non esiste, la pagina legge `news.json`. Per tenere le notizie aggiornate bisogna rigenerare il file regolarmente, ad esempio con una GitHub Action pianificata.
+- a ogni push su `main`
+- ogni ora (al minuto 7)
+- a richiesta, da **Actions → Aggiorna e pubblica → Run workflow**
+
+Attivazione, da fare una volta sola: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Il sito sarà su `https://<utente>.github.io/AggregaNotizie/`. Se in un aggiornamento nessun feed risponde, la pubblicazione viene annullata e resta online la versione precedente. Le testate non raggiungibili sono elencate nel log dell'Action e in fondo alla pagina.
+
+Per generare la versione statica in locale: `npm run build` (crea `public/news.json`; se `/api/news` non esiste, la pagina legge quel file).
 
 ## Test
 
